@@ -1,0 +1,1 @@
+cuando un archivo donde comience con $, significa que es una ruta dinamica

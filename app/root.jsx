@@ -3,7 +3,9 @@ import {
     Links,
     Outlet,
     Scripts,  //permite la recarga sea mas rapida
-    LiveReload //permite hacer el refresh sin recargar la pagina
+    LiveReload, //permite hacer el refresh sin recargar la pagina
+    useCatch,
+    Link
 } from '@remix-run/react'
 import styles from '~/styles/index.css'
 import Header from '~/components/header'
@@ -71,5 +73,25 @@ function Document({ children }) {
                 <LiveReload/>
             </body>
         </html>
+    )
+}
+
+/* Manejo de Errores */
+export function CatchBoundary(){
+    const error = useCatch()
+    return(
+        <Document>
+            <p className='error'>{error.status} {error.statusText}</p>
+            <Link className='error-link' to="/">Tal vez quieras volver a la página principal</Link>
+        </Document>
+    )
+}
+
+export function ErrorBoundary({error}){
+    return(
+        <Document>
+            <p className='error'>{error.status} {error.statusText}</p>
+            <Link className='error-link' to="/">Tal vez quieras volver a la página principal</Link>
+        </Document>
     )
 }
