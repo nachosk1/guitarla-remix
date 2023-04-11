@@ -1,0 +1,48 @@
+.blog{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+}
+@media (min-width: 768px) {
+    .blog{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 992px) {
+    .blog{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.post{
+    max-width: 80rem;
+    margin: 0 auto;
+}
+.post .content{
+    padding: 1.5rem;
+}
+.post .content h3{
+    font-weight: 900;
+    font-size: 2rem;
+}
+.post .summary{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+.post .content .title{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.post .date{
+    font-size: 1.7rem;
+    color: var(--primary);
+}
+.post .text{
+    white-space: pre-wrap;
+}
+.mt-3{
+    margin-top: 3rem;
+}
