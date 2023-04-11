@@ -13,8 +13,8 @@ const Navegation = () => {
                 className={location.pathname === '/us' ? 'active' : ''}
             >Nosotros</Link>
             <Link
-                to='/store'
-                className={location.pathname === '/store' ? 'active' : ''}
+                to='/guitars'
+                className={location.pathname === '/guitars' ? 'active' : ''}
             >Tienda</Link>
             <Link
                 to='/blog'

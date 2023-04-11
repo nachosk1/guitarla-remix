@@ -10,7 +10,10 @@ import stylesPosts from '~/styles/blog.css'
 import styleCourse from '~/styles/course.css'
 
 export function meta() {
-
+    return {
+        title: 'GuitarLa - Inicio',
+        description: 'GuitarLa - Inicio de Nuestra collecion de guitarras, blog y cursos'
+    }
 }
 
 export function links() {
@@ -53,7 +56,7 @@ function Index() {
             <main className="container">
                 <ListGuitars guitars={guitars} />
             </main>
-            <Course course={course.attributes}/>
+            <Course course={course.attributes} />
             <section className='container'>
                 <ListPost posts={posts} />
             </section>
