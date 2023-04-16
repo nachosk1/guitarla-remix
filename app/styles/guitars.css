@@ -50,3 +50,32 @@
     margin: 0;
     font-weight: 900;
 }
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.form label{
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+.form select{
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid var(--black);
+    border-radius: 1rem;
+}
+.form input[type="submit"]{
+    margin-top: 2rem;
+    background-color: var(--black);
+    color: var(--white);
+    text-transform: uppercase;
+    padding: 1.5rem;
+    border: none;
+    font-weight: 700;
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+.form input[type="submit"]:hover{
+    cursor: pointer;
+    background-color: var(--primary);
+}

@@ -69,6 +69,7 @@ main {
 }
 .header .navegation{
     display: flex;
+    align-items: center;
     gap: 2rem;
     margin-top: 5rem;
 }
@@ -89,6 +90,9 @@ main {
 }
 .header .navegation a:hover, .header .active{
     background-color: var(--primary);
+}
+.header .navegation .logo-shop{
+    width: 3rem;
 }
 
 /** Footer **/
@@ -119,6 +123,9 @@ main {
     font-size: 2rem;
     text-decoration: none;
     font-weight: 700;
+}
+.footer .navegation a:last-of-type{
+    display: none;
 }
 .footer .copyright{
     text-align: center;

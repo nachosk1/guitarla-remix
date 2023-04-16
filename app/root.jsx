@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import {
     Meta,
     Links,
@@ -12,8 +13,8 @@ import Header from '~/components/header'
 import Footer from '~/components/footer'
 
 
-export function meta(){
-    return(
+export function meta() {
+    return (
         {
             charset: 'utf-8',
             title: 'GuitarLa - Remix',
@@ -22,8 +23,8 @@ export function meta(){
     )
 }
 
-export function links(){
-    return[
+export function links() {
+    return [
         //siempre va primero el normalice
         {
             rel: 'stylesheet',
@@ -50,9 +51,54 @@ export function links(){
 }
 
 export default function App() {
+
+    const shopLS = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("carrito")) ?? [] : null
+    const [shop, setShop] = useState(shopLS)
+
+    useEffect(() => {
+        localStorage.setItem("carrito", JSON.stringify(shop))
+    }, [shop])
+
+    const addShop = guitar => {
+        if (shop.some(guitarState => guitarState.id === guitar.id)) {//devuelve un true o false
+            //Iterar sobre el arreglo, e identificar el elemento duplicado
+            const shopUpdate = shop.map(guitarState => {
+                if (guitarState.id === guitar.id) {
+                    //Reescribir la cantidad
+                    guitarState.amount = guitar.amount
+                }
+                return guitarState
+            })
+            //Añadir al carrito / actualizar
+            setShop(shopUpdate)
+        } else {
+            //Registro nuevo, agregar al carrito
+            setShop([...shop, guitar])
+        }
+    }
+    const updateAmount = guitar =>{
+        const shopUpdate = shop.map(guitarState => {
+            if(guitarState.id === guitar.id){
+                guitarState.amount = guitar.amount
+            }
+            return guitarState
+        })
+        setShop(shopUpdate)
+    }
+
+    const deleteGuitar = id => {
+        setShop(shop.filter(guitarState => guitarState.id !== id))
+    }
     return (
         <Document>
-            <Outlet/>
+            <Outlet
+                context={{
+                    addShop,
+                    shop,
+                    updateAmount,
+                    deleteGuitar
+                }}
+            />
         </Document>
     )
 }
@@ -61,25 +107,25 @@ function Document({ children }) {
     return (
         <html lang="es">
             <head>
-                <Meta/>
-                <Links/>
+                <Meta />
+                <Links />
             </head>
             <body>
-                <Header/>
+                <Header />
                 {children}
-                <Footer/>
+                <Footer />
 
-                <Scripts/>
-                <LiveReload/>
+                <Scripts />
+                <LiveReload />
             </body>
         </html>
     )
 }
 
 /* Manejo de Errores */
-export function CatchBoundary(){
+export function CatchBoundary() {
     const error = useCatch()
-    return(
+    return (
         <Document>
             <p className='error'>{error.status} {error.statusText}</p>
             <Link className='error-link' to="/">Tal vez quieras volver a la página principal</Link>
@@ -87,8 +133,8 @@ export function CatchBoundary(){
     )
 }
 
-export function ErrorBoundary({error}){
-    return(
+export function ErrorBoundary({ error }) {
+    return (
         <Document>
             <p className='error'>{error.status} {error.statusText}</p>
             <Link className='error-link' to="/">Tal vez quieras volver a la página principal</Link>
